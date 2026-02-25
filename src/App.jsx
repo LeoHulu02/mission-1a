@@ -1,16 +1,25 @@
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import "./index.css";
 import {
   getCourses,
   createCourse,
   updateCourse,
-  deleteCourse
+  deleteCourse as deleteCourseApi
 } from "./services/api/courseService";
+import {
+  setCourses,
+  addCourse,
+  updateCourse as updateCourseAction,
+  deleteCourse as deleteCourseAction,
+  setLoading,
+  setError
+} from "./store/redux/courseSlice";
 
 function App() {
-  const [courses, setCourses] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
+  const { data: courses, status, error } = useSelector((state) => state.courses);
+
   const [formData, setFormData] = useState({
     title: "",
     category: "",
@@ -24,25 +33,23 @@ function App() {
   const [submitting, setSubmitting] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
 
-  async function loadCourses() {
-    try {
-      setLoading(true);
-      const data = await getCourses();
-      const sanitizedCourses = Array.isArray(data)
-        ? data.filter((course) => course && course.id)
-        : [];
-      setCourses(sanitizedCourses);
-      setError(null);
-    } catch (err) {
-      setError(err.message || "Unknown error");
-    } finally {
-      setLoading(false);
-    }
-  }
-
   useEffect(() => {
+    async function loadCourses() {
+      if (status === 'idle') {
+        try {
+          dispatch(setLoading());
+          const data = await getCourses();
+          const sanitizedCourses = Array.isArray(data)
+            ? data.filter((course) => course && course.id)
+            : [];
+          dispatch(setCourses(sanitizedCourses));
+        } catch (err) {
+          dispatch(setError(err.message || "Unknown error"));
+        }
+      }
+    }
     loadCourses();
-  }, []);
+  }, [status, dispatch]);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -70,7 +77,6 @@ function App() {
       return;
     }
     setSubmitting(true);
-    setError(null);
     const priceValue = Number(formData.price);
     const payload = {
       title: formData.title,
@@ -83,11 +89,12 @@ function App() {
     };
 
     try {
-      await createCourse(payload);
-      await loadCourses();
+      const newCourse = await createCourse(payload);
+      dispatch(addCourse(newCourse));
       resetForm();
     } catch (err) {
-      setError(err.message || "Unknown error");
+      dispatch(setError(err.message || "Unknown error"));
+      alert("Gagal menambahkan kursus: " + (err.message || "Unknown error"));
     } finally {
       setSubmitting(false);
     }
@@ -126,7 +133,6 @@ function App() {
       return;
     }
     setSubmitting(true);
-    setError(null);
     const priceValue = Number(editingCourse.price);
     const payload = {
       title: editingCourse.title,
@@ -139,11 +145,12 @@ function App() {
     };
 
     try {
-      await updateCourse(editingCourse.id, payload);
-      await loadCourses();
+      const updatedCourse = await updateCourse(editingCourse.id, payload);
+      dispatch(updateCourseAction(updatedCourse));
       closeEditDialog();
     } catch (err) {
-      setError(err.message || "Unknown error");
+      dispatch(setError(err.message || "Unknown error"));
+      alert("Gagal mengupdate kursus: " + (err.message || "Unknown error"));
     } finally {
       setSubmitting(false);
     }
@@ -156,16 +163,17 @@ function App() {
     }
     try {
       setSubmitting(true);
-      await deleteCourse(id);
-      await loadCourses();
+      await deleteCourseApi(id);
+      dispatch(deleteCourseAction(id));
     } catch (err) {
-      setError(err.message || "Unknown error");
+      dispatch(setError(err.message || "Unknown error"));
+      alert("Gagal menghapus kursus: " + (err.message || "Unknown error"));
     } finally {
       setSubmitting(false);
     }
   }
 
-  if (loading) {
+  if (status === 'loading') {
     return (
       <div className="page">
         <header className="navbar">
@@ -181,7 +189,7 @@ function App() {
             <div className="hero-text">
               <p className="hero-kicker">Video Learning Platform</p>
               <h1 className="hero-title">VideoBelajar</h1>
-              <p className="hero-description">Memuat data kursus</p>
+              <p className="hero-description">Memuat data kursus...</p>
             </div>
           </div>
         </main>
@@ -189,7 +197,7 @@ function App() {
     );
   }
 
-  if (error) {
+  if (status === 'failed') {
     return (
       <div className="page">
         <header className="navbar">
