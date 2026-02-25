@@ -177,20 +177,18 @@ function App() {
     return (
       <div className="page">
         <header className="navbar">
-          <div className="navbar-logo">VideoBelajar</div>
-          <nav className="navbar-links">
-            <button type="button" className="button button-small">
-              Masuk
-            </button>
-          </nav>
+          <div className="container navbar-container">
+            <div className="navbar-logo">VideoBelajar</div>
+            <nav className="navbar-links">
+              <button type="button" className="button button-small">
+                Masuk
+              </button>
+            </nav>
+          </div>
         </header>
-        <main className="content">
-          <div className="hero">
-            <div className="hero-text">
-              <p className="hero-kicker">Video Learning Platform</p>
-              <h1 className="hero-title">VideoBelajar</h1>
-              <p className="hero-description">Memuat data kursus...</p>
-            </div>
+        <main className="content container section">
+          <div className="section-header">
+            <h1 className="section-title">Memuat data...</h1>
           </div>
         </main>
       </div>
@@ -201,23 +199,19 @@ function App() {
     return (
       <div className="page">
         <header className="navbar">
-          <div className="navbar-logo">VideoBelajar</div>
-          <nav className="navbar-links">
-            <button type="button" className="button button-small">
-              Masuk
-            </button>
-          </nav>
+          <div className="container navbar-container">
+            <div className="navbar-logo">VideoBelajar</div>
+            <nav className="navbar-links">
+              <button type="button" className="button button-small">
+                Masuk
+              </button>
+            </nav>
+          </div>
         </header>
-        <main className="content">
-          <div className="hero">
-            <div className="hero-text">
-              <p className="hero-kicker">Video Learning Platform</p>
-              <h1 className="hero-title">VideoBelajar</h1>
-              <p className="hero-description">
-                Terjadi kesalahan saat memuat kursus
-              </p>
-              <p className="hero-description">{error}</p>
-            </div>
+        <main className="content container section">
+          <div className="section-header">
+            <h1 className="section-title">Terjadi Kesalahan</h1>
+            <p className="section-subtitle">{error}</p>
           </div>
         </main>
       </div>
@@ -227,153 +221,163 @@ function App() {
   return (
     <div className="page">
       <header className="navbar">
-        <div className="navbar-logo">VideoBelajar</div>
-        <nav className="navbar-links">
-          <a href="#courses" className="navbar-link">
-            Kursus
-          </a>
-          <a href="#about" className="navbar-link">
-            Tentang
-          </a>
-          <button type="button" className="button button-small">
-            Masuk
-          </button>
-        </nav>
-      </header>
-      <header className="hero">
-        <div className="hero-text">
-          <p className="hero-kicker">Video Learning Platform</p>
-          <h1 className="hero-title">VideoBelajar</h1>
-          <p className="hero-description">
-            VideoBelajar adalah platform pembelajaran video berbasis web yang
-            memberi pengguna akses ke beragam kursus dan tutorial berbasis
-            video. Dengan VideoBelajar, pengguna dapat belajar dengan
-            kecepatan dan jadwal mereka sendiri.
-          </p>
+        <div className="container navbar-container">
+          <a href="#" className="navbar-logo">VideoBelajar</a>
+          <nav className="navbar-links">
+            <a href="#courses" className="navbar-link">
+              Kursus
+            </a>
+            <a href="#about" className="navbar-link">
+              Tentang
+            </a>
+            <button type="button" className="button button-small">
+              Masuk
+            </button>
+          </nav>
         </div>
-        <div className="hero-phone">
-          <div className="phone-frame">
-            <div className="phone-screen">
-              <p className="phone-title">Temukan Kursus Unggulan</p>
-              <p className="phone-subtitle">
-                Jelajahi berbagai topik mulai dari teknologi, bisnis, hingga
-                pengembangan diri.
-              </p>
+      </header>
+      
+      <section className="hero">
+        <div className="container hero-content">
+          <div className="hero-text">
+            <p className="hero-kicker">Video Learning Platform</p>
+            <h1 className="hero-title">Tingkatkan Skillmu dengan VideoBelajar</h1>
+            <p className="hero-description">
+              Platform pembelajaran video berbasis web yang
+              memberi akses ke beragam kursus dan tutorial. 
+              Belajar dengan kecepatan dan jadwalmu sendiri.
+            </p>
+            <a href="#courses" className="button">Mulai Belajar Sekarang</a>
+          </div>
+          <div className="hero-phone">
+            <div className="phone-frame">
+              <div className="phone-screen">
+                <p className="phone-title">Kursus Unggulan</p>
+                <p className="phone-subtitle">
+                  Teknologi, Bisnis, & Pengembangan Diri
+                </p>
+                <div style={{ marginTop: '2rem', fontSize: '3rem' }}>🚀</div>
+              </div>
             </div>
           </div>
         </div>
-      </header>
+      </section>
 
-      <main className="content">
-        <section id="courses" className="courses-section">
-          <h2 className="section-title">Koleksi Kursus Video Pembelajaran</h2>
-          <p className="section-subtitle">
-            Pilih kursus yang sesuai dengan kebutuhan dan minat belajar kamu.
-          </p>
+      <main className="container">
+        <section id="courses" className="section">
+          <div className="section-header">
+            <h2 className="section-title">Koleksi Kursus Terbaru</h2>
+            <p className="section-subtitle">
+              Pilih kursus yang sesuai dengan kebutuhan dan minat belajar kamu.
+            </p>
+          </div>
 
-          <form className="course-form" onSubmit={handleSubmit}>
+          <div className="course-form-container">
             <h3 className="course-form-title">Tambah Kursus Baru</h3>
-            <div className="course-form-grid">
-              <div className="course-form-field">
-                <label htmlFor="title">Judul Kursus</label>
-                <input
-                  id="title"
-                  name="title"
-                  type="text"
-                  value={formData.title}
-                  onChange={handleChange}
-                  placeholder="Belajar React dari Nol"
-                  required
-                />
+            <form className="course-form" onSubmit={handleSubmit}>
+              <div className="course-form-grid">
+                <div className="course-form-field">
+                  <label htmlFor="title">Judul Kursus</label>
+                  <input
+                    id="title"
+                    name="title"
+                    type="text"
+                    value={formData.title}
+                    onChange={handleChange}
+                    placeholder="Contoh: Belajar React dari Nol"
+                    required
+                  />
+                </div>
+                <div className="course-form-field">
+                  <label htmlFor="category">Kategori</label>
+                  <input
+                    id="category"
+                    name="category"
+                    type="text"
+                    value={formData.category}
+                    onChange={handleChange}
+                    placeholder="Contoh: Frontend"
+                    required
+                  />
+                </div>
+                <div className="course-form-field">
+                  <label htmlFor="level">Level</label>
+                  <input
+                    id="level"
+                    name="level"
+                    type="text"
+                    value={formData.level}
+                    onChange={handleChange}
+                    placeholder="Contoh: Beginner"
+                    required
+                  />
+                </div>
+                <div className="course-form-field">
+                  <label htmlFor="thumbnail">URL Thumbnail</label>
+                  <input
+                    id="thumbnail"
+                    name="thumbnail"
+                    type="text"
+                    value={formData.thumbnail}
+                    onChange={handleChange}
+                    placeholder="https://..."
+                    required
+                  />
+                </div>
+                <div className="course-form-field course-form-field-full">
+                  <label htmlFor="description">Deskripsi</label>
+                  <textarea
+                    id="description"
+                    name="description"
+                    value={formData.description}
+                    onChange={handleChange}
+                    rows="3"
+                    placeholder="Jelaskan secara singkat tentang kursus ini"
+                    required
+                  />
+                </div>
+                <div className="course-form-field">
+                  <label htmlFor="duration">Durasi</label>
+                  <input
+                    id="duration"
+                    name="duration"
+                    type="text"
+                    value={formData.duration}
+                    onChange={handleChange}
+                    placeholder="Contoh: 3h 25m"
+                    required
+                  />
+                </div>
+                <div className="course-form-field">
+                  <label htmlFor="price">Harga (Rp)</label>
+                  <input
+                    id="price"
+                    name="price"
+                    type="number"
+                    min="0"
+                    value={formData.price}
+                    onChange={handleChange}
+                    placeholder="0 untuk Gratis"
+                    required
+                  />
+                </div>
               </div>
-              <div className="course-form-field">
-                <label htmlFor="category">Kategori</label>
-                <input
-                  id="category"
-                  name="category"
-                  type="text"
-                  value={formData.category}
-                  onChange={handleChange}
-                  placeholder="Frontend"
-                  required
-                />
+              <div className="course-form-actions">
+                <button
+                  className="button button-secondary"
+                  type="button"
+                  onClick={resetForm}
+                  disabled={submitting}
+                >
+                  Reset
+                </button>
+                <button className="button" type="submit" disabled={submitting}>
+                  {submitting ? 'Menyimpan...' : 'Tambah Kursus'}
+                </button>
               </div>
-              <div className="course-form-field">
-                <label htmlFor="level">Level</label>
-                <input
-                  id="level"
-                  name="level"
-                  type="text"
-                  value={formData.level}
-                  onChange={handleChange}
-                  placeholder="Beginner"
-                  required
-                />
-              </div>
-              <div className="course-form-field">
-                <label htmlFor="thumbnail">URL Thumbnail</label>
-                <input
-                  id="thumbnail"
-                  name="thumbnail"
-                  type="text"
-                  value={formData.thumbnail}
-                  onChange={handleChange}
-                  placeholder="https://..."
-                  required
-                />
-              </div>
-              <div className="course-form-field course-form-field-full">
-                <label htmlFor="description">Deskripsi</label>
-                <textarea
-                  id="description"
-                  name="description"
-                  value={formData.description}
-                  onChange={handleChange}
-                  rows="3"
-                  placeholder="Jelaskan secara singkat tentang kursus ini"
-                  required
-                />
-              </div>
-              <div className="course-form-field">
-                <label htmlFor="duration">Durasi</label>
-                <input
-                  id="duration"
-                  name="duration"
-                  type="text"
-                  value={formData.duration}
-                  onChange={handleChange}
-                  placeholder="3h 25m"
-                  required
-                />
-              </div>
-              <div className="course-form-field">
-                <label htmlFor="price">Harga (Rp)</label>
-                <input
-                  id="price"
-                  name="price"
-                  type="number"
-                  min="0"
-                  value={formData.price}
-                  onChange={handleChange}
-                  placeholder="0 untuk Gratis"
-                  required
-                />
-              </div>
-            </div>
-            <div className="course-form-actions">
-              <button className="button" type="submit" disabled={submitting}>
-                Tambah Kursus
-              </button>
-              <button
-                className="button button-secondary"
-                type="button"
-                onClick={resetForm}
-                disabled={submitting}
-              >
-                Reset
-              </button>
-            </div>
-          </form>
+            </form>
+          </div>
+
           <div className="courses-grid">
             {courses.map((course) => (
               <article key={course.id} className="course-card">
@@ -386,20 +390,29 @@ function App() {
                         : "https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg"
                     }
                     alt={course.title}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = "https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg";
+                    }}
                   />
                 </div>
                 <div className="course-body">
-                  <h3 className="course-title">{course.title}</h3>
-                  <p className="course-meta">
+                  <div className="course-meta">
                     <span>{course.category}</span>
                     <span>•</span>
                     <span>{course.level}</span>
-                  </p>
+                  </div>
+                  <h3 className="course-title">{course.title}</h3>
                   <p className="course-description">{course.description}</p>
                   <div className="course-footer">
-                    <span className="course-duration">{course.duration}</span>
+                    <span className="course-duration">
+                      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      {course.duration}
+                    </span>
                     <span className="course-price">
-                      {course.price === 0 ? "Gratis" : `Rp ${course.price}`}
+                      {course.price === 0 ? "Gratis" : `Rp ${course.price.toLocaleString('id-ID')}`}
                     </span>
                   </div>
                   <div className="course-card-actions">
@@ -425,15 +438,19 @@ function App() {
             ))}
           </div>
         </section>
-        <section id="about" className="about-section">
+        
+        <section id="about" className="section">
           <div className="about-inner">
             <div className="about-text">
               <h2 className="section-title">Belajar Fleksibel dan Terarah</h2>
               <p className="section-subtitle">
                 Akses beragam kursus video yang dirancang untuk membantu kamu
                 meningkatkan skill secara bertahap, kapan saja dan di mana
-                saja.
+                saja. Platform kami didesain untuk kenyamanan belajar maksimal.
               </p>
+              <div style={{ marginTop: '2rem' }}>
+                <a href="#courses" className="button">Lihat Semua Kursus</a>
+              </div>
             </div>
             <div className="about-image">
               <img
@@ -444,6 +461,7 @@ function App() {
           </div>
         </section>
       </main>
+
       {isEditDialogOpen && editingCourse && (
         <div className="dialog-backdrop" onClick={closeEditDialog}>
           <div
@@ -546,7 +564,7 @@ function App() {
                   className="button"
                   disabled={submitting}
                 >
-                  Simpan Perubahan
+                  {submitting ? 'Menyimpan...' : 'Simpan Perubahan'}
                 </button>
               </div>
             </form>
