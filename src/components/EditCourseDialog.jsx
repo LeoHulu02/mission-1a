@@ -1,30 +1,16 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-export default function EditCourseDialog({ isOpen, initialData, onClose, onSubmit, isSubmitting }) {
-  const [formData, setFormData] = useState({
-    title: "",
-    category: "",
-    level: "",
-    thumbnail: "",
-    description: "",
-    duration: "",
-    price: ""
-  });
-
-  useEffect(() => {
-    if (initialData) {
-      setFormData({
-        title: initialData.title || "",
-        category: initialData.category || "",
-        level: initialData.level || "",
-        thumbnail: initialData.thumbnail || "",
-        description: initialData.description || "",
-        duration: initialData.duration || "",
-        price: initialData.price ?? ""
-      });
-    }
-  }, [initialData]);
+export default function EditCourseDialog({ initialData, onClose, onSubmit, isSubmitting }) {
+  const [formData, setFormData] = useState(() => ({
+    title: initialData.title || "",
+    category: initialData.category || "",
+    level: initialData.level || "",
+    thumbnail: initialData.thumbnail || "",
+    description: initialData.description || "",
+    duration: initialData.duration || "",
+    price: initialData.price ?? ""
+  }));
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -39,7 +25,7 @@ export default function EditCourseDialog({ isOpen, initialData, onClose, onSubmi
     onSubmit(formData);
   }
 
-  if (!isOpen || !initialData) return null;
+  if (!initialData) return null;
 
   return (
     <div className="dialog-backdrop" onClick={onClose}>

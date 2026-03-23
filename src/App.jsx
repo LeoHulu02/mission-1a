@@ -150,10 +150,40 @@ function App() {
     return (
       <div className="page">
         <Navbar />
-        <main className="content container section">
-          <div className="section-header">
-            <h1 className="section-title">Memuat data...</h1>
-          </div>
+        <main className="container">
+          <section className="section">
+            <div className="section-header">
+              <h2 className="section-title">Koleksi Kursus Terbaru</h2>
+              <p className="section-subtitle">
+                Sedang menyiapkan daftar kursus terbaik untukmu.
+              </p>
+            </div>
+            <div className="courses-grid">
+              {[1, 2, 3].map((item) => (
+                <article key={item} className="course-card course-card-skeleton">
+                  <div className="course-thumbnail skeleton-block" />
+                  <div className="course-body">
+                    <div className="course-meta">
+                      <span className="skeleton-pill" />
+                      <span className="skeleton-pill" />
+                    </div>
+                    <div className="skeleton-line skeleton-line-lg" />
+                    <div className="skeleton-line" />
+                    <div className="skeleton-line skeleton-line-short" />
+                    <div className="course-footer">
+                      <span className="course-duration">
+                        <span className="skeleton-icon" />
+                        <span className="skeleton-line skeleton-line-xs" />
+                      </span>
+                      <span className="course-price">
+                        <span className="skeleton-line skeleton-line-xs" />
+                      </span>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
         </main>
         <Footer />
       </div>
@@ -189,6 +219,38 @@ function App() {
       <Hero />
 
       <main className="container">
+        <section className="section section-highlights">
+          <div className="section-header">
+            <h2 className="section-title">Kenapa memilih VideoBelajar?</h2>
+            <p className="section-subtitle">
+              Platform yang dirancang untuk membantu kamu belajar dengan fokus, terarah, dan fleksibel.
+            </p>
+          </div>
+          <div className="highlights-grid">
+            <article className="highlight-card">
+              <div className="highlight-icon">🎯</div>
+              <h3 className="highlight-title">Kurikulum Terstruktur</h3>
+              <p className="highlight-description">
+                Setiap kursus disusun dalam modul yang runtut, sehingga kamu bisa belajar langkah demi langkah tanpa bingung.
+              </p>
+            </article>
+            <article className="highlight-card">
+              <div className="highlight-icon">⏱️</div>
+              <h3 className="highlight-title">Belajar Fleksibel</h3>
+              <p className="highlight-description">
+                Akses materi kapan pun dan di mana pun, sesuaikan dengan ritme dan jadwal aktivitas harianmu.
+              </p>
+            </article>
+            <article className="highlight-card">
+              <div className="highlight-icon">📈</div>
+              <h3 className="highlight-title">Fokus pada Skill</h3>
+              <p className="highlight-description">
+                Materi difokuskan pada skill praktis yang relevan dengan kebutuhan industri dan kariermu.
+              </p>
+            </article>
+          </div>
+        </section>
+
         <section id="courses" className="section">
           <div className="section-header">
             <h2 className="section-title">Koleksi Kursus Terbaru</h2>
@@ -211,13 +273,15 @@ function App() {
 
       <Footer />
 
-      <EditCourseDialog
-        isOpen={isEditDialogOpen}
-        initialData={editingCourse}
-        onClose={closeEditDialog}
-        onSubmit={handleUpdateCourse}
-        isSubmitting={submitting}
-      />
+      {isEditDialogOpen && editingCourse && (
+        <EditCourseDialog
+          key={editingCourse.id}
+          initialData={editingCourse}
+          onClose={closeEditDialog}
+          onSubmit={handleUpdateCourse}
+          isSubmitting={submitting}
+        />
+      )}
 
       {toast && (
         <div className="toast-container">

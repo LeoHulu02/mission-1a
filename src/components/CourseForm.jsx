@@ -89,6 +89,9 @@ export default function CourseForm({ onSubmit, isSubmitting }) {
               placeholder="https://..."
               required
             />
+            <p className="field-helper">
+              Gunakan URL gambar horizontal (16:9) agar tampilan kartu lebih optimal.
+            </p>
           </div>
           <div className="course-form-field course-form-field-full">
             <label htmlFor="description">Deskripsi</label>
@@ -126,6 +129,9 @@ export default function CourseForm({ onSubmit, isSubmitting }) {
               placeholder="0 untuk Gratis"
               required
             />
+            <p className="field-helper">
+              Masukkan 0 jika kursus ini ingin dibuat gratis.
+            </p>
           </div>
         </div>
         <div className="course-form-actions">

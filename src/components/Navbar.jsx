@@ -13,7 +13,7 @@ export default function Navbar() {
           <a href="#about" className="navbar-link">
             Tentang
           </a>
-          <button type="button" className="button button-small">
+          <button type="button" className="button button-small button-secondary navbar-cta">
             Masuk
           </button>
         </nav>
